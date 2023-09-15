@@ -76,6 +76,24 @@ class GAME_ANALYSE{
             }
             bp[y].tot = 0;
         }
+        void wcombmerge(int x, int y){
+            for(int i = 0; i <= white[y].tot; i ++){
+                white[x].tot ++;
+                white[x].lpParts[white[x].tot] = white[y].lpParts[i];
+                for(int j = 0; j <= (*(white[x].lpParts[white[x].tot])).tot; j ++)
+                combmap[(*(*(white[x].lpParts[white[x].tot])).lpStones[j]).x][(*(*(white[x].lpParts[white[x].tot])).lpStones[j]).y] = x;
+            }
+            white[y].tot = 0;
+        }
+        void bcombmerge(int x, int y){
+            for(int i = 0; i <= black[y].tot; i ++){
+                black[x].tot ++;
+                black[x].lpParts[black[x].tot] = black[y].lpParts[i];
+                for(int j = 0; j <= (*(black[x].lpParts[black[x].tot])).tot; j ++)
+                combmap[(*(*(black[x].lpParts[black[x].tot])).lpStones[j]).x][(*(*(black[x].lpParts[black[x].tot])).lpStones[j]).y] = x;
+            }
+            black[y].tot = 0;
+        }
         void parting(int x, int y){
             if(Board.board[x][y] == -1){
                 //DEBUG
