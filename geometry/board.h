@@ -1,6 +1,6 @@
 /**********
  * Game Board
- * GrayGO 0.1 Copyright (c)
+ * GrayGO 0.1
 ***********/
 
 //DEBUG
@@ -138,12 +138,14 @@ class GAME_ANALYSE{
                 ws[wstot].color = WHITE;
                 ws[wstot].x     = x;
                 ws[wstot].y     = y;
+                parting(x,y);
             }
             if(COLOR == BLACK){
                 wstot++;
                 ws[wstot].color = WHITE;
                 ws[wstot].x     = x;
                 ws[wstot].y     = y;
+                parting(x,y);
             }
         }
 
