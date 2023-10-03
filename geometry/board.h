@@ -9,13 +9,19 @@ void err(){
     printf("GEOMETRY MODOLE ERROR!\n");
 }
 
+#include "geoanalyse.h"
+
+
+void MultiAnalyse(void *p);
+
+
 #define WHITE 0
 #define BLACK 1
 
 class GAME_BOARD{
     public:
         int size = 19;
-        char board[19][19];
+        char board[21][21];
 };
 
 struct STONE{
@@ -25,6 +31,8 @@ struct STONE{
 
 struct PART{
     bool color;
+    int QI;
+    long double strength = 1;
     int tot = 0;
     STONE* lpStones [361];
 };
@@ -56,8 +64,8 @@ class GAME_ANALYSE{
         int JIE_x; int JIE_y;
 
 
-        int partmap[19][19];
-        int combmap[19][19];
+        int partmap[21][21];
+        int combmap[21][21];
 
         //Functions
         void wpartmerge(int x, int y){
@@ -132,7 +140,7 @@ class GAME_ANALYSE{
                 }
             }
         }
-        void putstone(bool COLOR, int x, int y){
+        void putstone(short COLOR, int x, int y){
             if(COLOR == WHITE){
                 wstot++;
                 ws[wstot].color = WHITE;
@@ -149,6 +157,30 @@ class GAME_ANALYSE{
             }
         }
 
+        int take(int x, int y){
+            return 0;
+        }
+
+        bool move_valid(short COLOR, int x, int y){
+            if(x<1 || x > 19 || y < 1 || y > 19)return false;
+            if(partmap[x][y] != -1){
+                return false;
+            }
+            if(JIE){
+                if(JIE_x == x && JIE_y == y){
+                    return false;
+                }
+            }
+            GAME_ANALYSE temp = *this;
+            temp.putstone(COLOR, x, y);
+            MultiAnalyse(&temp);
+            for(int i = 0;;);
+        }
+
+        bool Go(short COLOR, int x, int y){
+
+        }
+
 };
 
 /*class GAME_CASE{
@@ -158,3 +190,9 @@ class GAME_ANALYSE{
         int JIE_x; int JIE_y;
         
 };*/
+
+
+void MultiAnalyse(void *p){
+    GAME_ANALYSE* tgt = (GAME_ANALYSE*)p;
+
+}
